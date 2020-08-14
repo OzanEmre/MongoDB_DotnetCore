@@ -1,0 +1,9 @@
+F:\Workspace\DotnetCore\MongoDB_DotnetCore\MongoDB_DotnetCore.Model\bin\Debug\netstandard2.0\MongoDB_DotnetCore.Model.deps.json
+F:\Workspace\DotnetCore\MongoDB_DotnetCore\MongoDB_DotnetCore.Model\bin\Debug\netstandard2.0\MongoDB_DotnetCore.Model.dll
+F:\Workspace\DotnetCore\MongoDB_DotnetCore\MongoDB_DotnetCore.Model\bin\Debug\netstandard2.0\MongoDB_DotnetCore.Model.pdb
+F:\Workspace\DotnetCore\MongoDB_DotnetCore\MongoDB_DotnetCore.Model\obj\Debug\netstandard2.0\MongoDB_DotnetCore.Model.csprojAssemblyReference.cache
+F:\Workspace\DotnetCore\MongoDB_DotnetCore\MongoDB_DotnetCore.Model\obj\Debug\netstandard2.0\MongoDB_DotnetCore.Model.csproj.CoreCompileInputs.cache
+F:\Workspace\DotnetCore\MongoDB_DotnetCore\MongoDB_DotnetCore.Model\obj\Debug\netstandard2.0\MongoDB_DotnetCore.Model.AssemblyInfoInputs.cache
+F:\Workspace\DotnetCore\MongoDB_DotnetCore\MongoDB_DotnetCore.Model\obj\Debug\netstandard2.0\MongoDB_DotnetCore.Model.AssemblyInfo.cs
+F:\Workspace\DotnetCore\MongoDB_DotnetCore\MongoDB_DotnetCore.Model\obj\Debug\netstandard2.0\MongoDB_DotnetCore.Model.dll
+F:\Workspace\DotnetCore\MongoDB_DotnetCore\MongoDB_DotnetCore.Model\obj\Debug\netstandard2.0\MongoDB_DotnetCore.Model.pdb

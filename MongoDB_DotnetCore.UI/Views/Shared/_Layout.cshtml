@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MongoDB_DotnetCore.UI</title>
+    
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+              crossorigin="anonymous"
+              integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE="/>
+    </environment>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MongoDB_DotnetCore.UI</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <partial name="_CookieConsentPartial" />
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <div id="app">
+        {{ message }}
+        <form v-on:submit.prevent="addNew">
+            <label for="ID">ID: </label>
+            <input type="text" v-model="id" id="ID"><br>
+            <label for="name">Name: </label>
+            <input type="text" v-model="name" id="Name"><br>
+            <label for="description">Description: </label>
+            <input type="text" v-model="description" id="Description"><br>
+            <button>Tıkla</button>
+        </form>
+        <li v-for="item in items">
+            {{ item.id }}- {{ item.name }} / {{ item.description }} | <label v-on:click="deleteOne" >Sil</label>
+        </li>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2019 - MongoDB_DotnetCore.UI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha256-E/V4cWE4qvAeO5MOhjtGtqDzPndRO1LBk8lJ/PR7CA4=">
+        </script>
+    </environment>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello Vue!',
+                items : []
+            },
+            methods: {
+                getTask: function () {
+                var vm = this
+                axios.get('http://localhost:5100/api/Tasks')
+                    .then(function (response) {
+                        vm.items = response.data.result
+                    })
+                    .catch(function (error) {
+                        vm.message = 'Error! Could not reach the API. ' + error
+                    })
+                },
+                addNew: function () {
+                    axios.post('http://localhost:5100/api/Tasks/add', {
+                        ID: this.id,
+                        name: this.name,
+                        description: this.description
+                    })
+                    .then(function (response) {
+                        vm.message = response.data.message
+                    })
+                    .catch(function (error) {
+                        vm.message = 'Error! Could not reach the API. ' + error
+                    });
+                    app.getTask();
+                },
+                deleteOne: function (id) {
+                    axios.post('http://localhost:5100/api/Tasks/delete', {
+                        ID: this.id
+                    })
+                    .then(function (response) {
+                        vm.message = response.data.message
+                    })
+                    .catch(function (error) {
+                        vm.message = 'Error! Could not reach the API. ' + error
+                    });
+                    app.getTask();
+                }
+            }
+        });
+        app.getTask();
+    </script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
